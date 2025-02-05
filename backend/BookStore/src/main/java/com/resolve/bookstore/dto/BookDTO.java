@@ -13,7 +13,11 @@ import lombok.NoArgsConstructor;
 public class BookDTO {
     private String title;
     private String author;
+    private String description;
     private Double price;
+    private String publisher;
+    private Integer publishedYear;
+    private Integer pages;
 
     // Getters and Setters
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/books")
-
+@CrossOrigin()
 public class BookController {
 
     private final BookService bookService;
