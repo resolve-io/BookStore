@@ -1,0 +1,135 @@
+.book-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .book-detail-header {
+    text-align: center;
+  }
+
+  .book-detail-image {
+    display: flex;
+    width: 40%;
+    height: auto;
+  }
+  
+  .book-detail-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .book-detail-author {
+    font-size: 1.3rem;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .book-detail-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  
+  .book-image img {
+    width: 350px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .book-detail-info {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .book-detail-price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #e91e63;
+    margin-bottom: 20px;
+  }
+  
+  .book-detail-description {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .book-detail-publisher,
+  .book-detail-year,
+  .book-detail-pages {
+    font-size: 1.1rem;
+    color: #444;
+    margin: 5px 0;
+  }
+
+  .book-detail-values {
+    font-weight: 700;
+  }
+  
+  .book-detail-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .add-to-cart-btn,
+  .buy-now-btn {
+    background-color: #28a745;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-to-cart-btn:hover,
+  .buy-now-btn:hover {
+    background-color: #218838;
+  }
+  
+  .buy-now-btn {
+    background-color: #e91e63;
+  }
+  
+  .buy-now-btn:hover {
+    background-color: #c2185b;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .book-detail-body {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .book-image img {
+      width: 250px;
+      height: 350px;
+    }
+  
+    .book-info {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .book-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .add-to-cart-btn,
+    .buy-now-btn {
+      width: 100%;
+      margin: 10px 0;
+    }
+  }
+  
