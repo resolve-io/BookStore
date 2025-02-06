@@ -12,16 +12,7 @@ import java.util.Date;
 @Builder
 @Data
 
-public class BookDTO {
+public class BookAvailabilityDTO {
     private Long bookId;
-    private String title;
-    private String author;
-    private String description;
-    private Double price;
-    private String publisher;
-    private Date publishedDate;
-    private int pages;
     private int availableCopies;
-
-    // Getters and Setters
 }

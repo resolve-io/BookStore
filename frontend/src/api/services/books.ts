@@ -1,7 +1,7 @@
 import { Book } from '../../types/books-types';
 import axiosInstance from '../axiosInstance';
 
-const getAllBooks = async () => {
+const fetchAllBooks = async () => {
     try {
         const response = await axiosInstance.get<Book[]>('/books/all');
         return response.data;
@@ -19,4 +19,22 @@ const getBookById = async (id: string | undefined) => {
     }
 }
 
-export { getAllBooks, getBookById}
+const addBook = async (payload: Book) => {
+    try {
+        const response = await axiosInstance.post<Book>(`/books/create`, payload);
+        return response.data;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+const deleteBook = async (bookId: number) => {
+    try {
+        const response = await axiosInstance.delete<Book>(`/books/${bookId}`);
+        return response.data;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+export { fetchAllBooks, getBookById, addBook, deleteBook}

@@ -8,10 +8,9 @@
   }
   
   .book-card {
-    background: linear-gradient(45deg, #f3e341, transparent);
+    background: linear-gradient(45deg, #f7cab2, transparent);
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
@@ -65,7 +64,7 @@
   .book-price {
     font-size: 1.6rem;
     color: #ee0f5b;
-    margin-bottom: 15px;
+    margin: 0;
     font-weight: 900;
   }
   
@@ -91,5 +90,20 @@
   
   .book-card-button:hover {
     background-color: #bac544;
+  }
+
+  .book-card-delete-action {
+    position: relative;
+    display: flex;
+    justify-content: end;
+    height: 0;
+    top: -12px;
+    right: -12px;
+    cursor: pointer;
+  }
+
+  .book-card-delete-action i {
+    font-size: 1.8rem;
+    z-index: 999999;
   }
   

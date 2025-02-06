@@ -1,0 +1,18 @@
+.user-actions-add-book {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    justify-content: end;
+}
+
+.store-empty {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 240px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #c1597c;
+}

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -22,8 +24,9 @@ public class Book {
     private String description;
     private Double price;
     private String publisher;
-    private Integer publishedYear;
-    private Integer pages;
+    private Date publishedDate;
+    private int pages;
+    private int availableCopies;
 
     // Getters and Setters
 }

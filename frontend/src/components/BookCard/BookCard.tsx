@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import './BookCard.css';
 
 const BookCard = ({ book }) => {
-  const { title, author, price, image, description } = book;
+  const { title, author, price, description } = book;
   const navigate = useNavigate();
 
   const handleView = () => {

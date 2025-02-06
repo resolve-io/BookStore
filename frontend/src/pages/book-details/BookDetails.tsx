@@ -13,6 +13,11 @@ const BookDetails = () => {
     navigate("/");
   }
 
+   // Convert the `publishedDate` to a string (if it exists)
+   const formattedPublishedDate = book?.publishedDate
+   ? new Date(book.publishedDate).toLocaleDateString() // or use .toString(), .toDateString(), etc.
+   : "No date available"; // Fallback if `publishedDate` is undefined
+
   useEffect(() => {
     getBookById(id).then(book => {
       setBook(book);
@@ -27,11 +32,6 @@ const BookDetails = () => {
       </label>
       
       <div className="book-detail-container">
-        
-        <div className="book-detail-header">
-          <h2 className="book-detail-title">{book?.title}</h2>
-          <h4 className="book-detail-author">by {book?.author}</h4>
-        </div>
 
         <div className="book-detail-body">
           <div className="book-detail-image">
@@ -39,10 +39,14 @@ const BookDetails = () => {
           </div>
 
           <div className="book-detail-info">
+            <div className="book-detail-header">
+              <h2 className="book-detail-title">{book?.title}</h2>
+              <h4 className="book-detail-author">by {book?.author}</h4>
+            </div>
             <p className="book-detail-price">${book?.price}</p>
             <p className="book-detail-description">{book?.description}</p>
             <p className="book-detail-publisher">Publisher: <span className='book-detail-values'>{book?.publisher}</span></p>
-            <p className="book-detail-year">Year: <span className='book-detail-values'>{book?.publishedYear}</span></p>
+            <p className="book-detail-year">Published Date: <span className='book-detail-values'>{formattedPublishedDate}</span></p>
             <p className="book-detail-pages">Pages: <span className='book-detail-values'>{book?.pages}</span></p>
 
             <div className="book-detail-actions">

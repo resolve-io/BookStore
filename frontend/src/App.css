@@ -1,5 +1,6 @@
 .App {
-  padding: 25px;
+  margin: 25px;
+  height: calc(100% - 120px);
 }
 
 .back-nav {
