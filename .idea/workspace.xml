@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69cc6dde-eaa0-4af6-bfeb-388d65f525b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/controller/OrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/dto/OrderDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/model/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/model/OrderStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/OrderRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/OrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.mv.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/controller/BookAvailabilityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/controller/BookAvailabilityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/dto/BookDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/dto/BookDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/model/BookAvailability.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/model/BookAvailability.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.trace.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/BookAvailabilityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/BookAvailabilityRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/BookRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/BookAvailabilityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/BookAvailabilityService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/add-book/AddBook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/add-book/AddBook.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/book-details/BookDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/book-details/BookDetails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/book-details/BookDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/book-details/BookDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/books/Books.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/books/Books.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/types/books-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/books-types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -31,8 +31,10 @@ public class BookService {
                 .map(Book::getId)
                 .collect(Collectors.toList());
 
+        System.out.println(bookIds);
+//        System.out.println(bookAvailabilityRepository.findAllById(bookIds));
         // Use batch fetching (a single database call) instead of calling findById for each book.
-        Map<Long, Integer> availabilityMap = bookAvailabilityRepository.findAllById(bookIds)
+        Map<Long, Integer> availabilityMap = bookAvailabilityRepository.findAllByBookIdIn(bookIds)
                 .stream()
                 .collect(Collectors.toMap(BookAvailability::getBookId, BookAvailability::getAvailableCopies));
 
