@@ -19,7 +19,7 @@ const BookDetails = () => {
   const { user } = useAuthContext();
   const { showLoader, hideLoader } = useLoaderContext();
 
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
 
   // Increment the quantity
   const incrementQuantity = () => {
@@ -62,6 +62,10 @@ const BookDetails = () => {
     showLoader();
     manageBookStock(payload).then(() => {
       showToast("Updated Stocks successfully!", 'success');
+    }, error => {
+      if (error.status === 400) {
+        showToast(error.response.data.message, 'error');
+      }
     }).finally(() => {
       closeModal();
       hideLoader();
@@ -73,7 +77,11 @@ const BookDetails = () => {
     showLoader();
     placeOrder(book?.id as number, quantity).then(() => {
       showToast("Order placed successfully!", 'success');
-      setQuantity(1);
+      setQuantity(0);
+    }, error => {
+      if (error.status === 400) {
+        showToast(error.response.data.message, 'error');
+      }
     }).finally(() => {
       hideLoader();
       fetchBookById();
@@ -146,7 +154,7 @@ const BookDetails = () => {
 
             <div className="book-detail-actions">
               {/* <button className="add-to-cart-btn">Add to Cart</button> */}
-              <button className="buy-now-btn" onClick={handleBuyNow}>Buy Now</button>
+              <button className="buy-now-btn" onClick={handleBuyNow} disabled={!quantity}>Buy Now</button>
             </div>
           </div>
         </div>

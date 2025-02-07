@@ -42,9 +42,9 @@ const Header = () => {
             {user ? (
               <li className="dropdown">
                 <Link to="#" className="dropdown-toggle">
-                  Palanivel R <i className="fas fa-caret-down"></i>
+                  {user.email}
                 </Link>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu user-menu">
                   {/* <li>
                     <Link to="/settings">Settings</Link>
                   </li> */}

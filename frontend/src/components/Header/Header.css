@@ -134,6 +134,13 @@
   margin-left: 8px;
 }
 
+.user-menu li a {
+  color: #e91e63 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
   
   /* Mobile responsiveness */

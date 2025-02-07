@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { AuthUser } from "../../types/auth-types";
 import { useLoaderContext } from "../../context/LoaderContext";
+import { useState } from "react";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -14,6 +15,7 @@ const validationSchema = Yup.object({
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const [authErrorMessage, setAuthErrorMessage] = useState<string | null>(null);
 
   const { login } = useAuthContext();
   const { showLoader, hideLoader } = useLoaderContext();
@@ -22,10 +24,16 @@ const LoginForm = () => {
     showLoader();
     // Here, you would send a request to the backend to authenticate the user
     // For this example, let's assume a successful login:
-    login(cred).then(() => {
+    try {
+      await login(cred).then(() => {
+        hideLoader();
+        navigate("/");
+      });
+    } catch {
+      setAuthErrorMessage("Invalid email or password")
+    } finally {
       hideLoader();
-      navigate("/");
-    });
+    }
   };
 
   return (
@@ -66,6 +74,12 @@ const LoginForm = () => {
               />
               <ErrorMessage name="password" component="div" className="error-message" />
             </div>
+
+            {
+              authErrorMessage && (
+                <div className="error-message invalid">{authErrorMessage}</div>
+              )
+            }
 
             <div className="login-form-group">
               <button type="submit" className="submit-btn">Login</button>

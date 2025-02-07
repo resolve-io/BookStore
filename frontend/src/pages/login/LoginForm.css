@@ -45,6 +45,10 @@
     font-size: 12px;
     margin-top: 5px;
   }
+
+  .error-message.invalid {
+    margin: 10px 0;
+  }
   
   /* Submit Button */
   .submit-btn {

@@ -119,4 +119,8 @@
     color: #121212;
     gap: 5px;
   }
+
+  .book-stocks-availablity .no-copies {
+    color: #ee0f5b;
+  }
   

@@ -1,7 +1,16 @@
 import { Formik, Field, Form } from 'formik';
 import "./BookSearch.css"
+import { debounce } from 'lodash'
+
 
 const BookSearch = ({ onSearch }) => {
+
+  // Debounced function to call fetchData
+  const debouncedFetchBooks = debounce((searchQuery:string) => {
+    onSearch(searchQuery);
+  }, 500); // 500ms debounce delay
+
+
   return (
     <div className='book-search-form-container'>
       <Formik
@@ -18,7 +27,10 @@ const BookSearch = ({ onSearch }) => {
                 name="searchTerm"
                 type="text"
                 value={values.searchTerm}
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e); // Formik's default onChange
+                  debouncedFetchBooks(e.target.value); // Update searchTerm state
+                }}
                 placeholder="Search for books"
               />
             </div>

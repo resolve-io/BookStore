@@ -39,6 +39,12 @@ a {
   color: #213547;
 }
 
+button:disabled {
+  background-color: #dee2e6 !important;
+  color: #adb5bd !important;
+  cursor: default;
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {

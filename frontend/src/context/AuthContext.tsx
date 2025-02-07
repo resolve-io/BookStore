@@ -28,6 +28,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (userData: AuthUser) => {
+    if (userData.password !== 'admin098' || userData.email !== 'admin@resolve.io') {
+      throw new Error("Login failed!");
+    }
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));  // Store user in localStorage
     await new Promise((resolve) => setTimeout(resolve, 1000)); // Make it asynchronous

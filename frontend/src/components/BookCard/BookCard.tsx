@@ -20,7 +20,8 @@ const BookCard = ({ book }) => {
         <p className="book-price">${price}</p>
         <p className="book-description multi-line-ellipsis">{description}</p>
         <span className='book-stocks-availablity'>
-          Hurry Up, Only {availableCopies} left!.
+          { availableCopies > 0 && <span>Hurry Up, Only {availableCopies} left!.</span> }
+          { !availableCopies && <span className='no-copies'>Out of Stock!.</span> }
           <button className="book-card-button" onClick={handleView}>View</button>
         </span>
       </div>
