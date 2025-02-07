@@ -37,4 +37,12 @@ const deleteBook = async (bookId: number) => {
     }
 }
 
-export { fetchAllBooks, getBookById, addBook, deleteBook}
+const fetchAllBooksBySearch = async (search: string) => {
+    try {
+        const response = await axiosInstance.get<Book[]>(`/books/search`, { params: { searchTerm: search }});
+        return response.data;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+export { fetchAllBooks, getBookById, addBook, deleteBook, fetchAllBooksBySearch}

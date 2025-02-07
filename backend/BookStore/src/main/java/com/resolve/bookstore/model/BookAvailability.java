@@ -18,6 +18,13 @@ public class BookAvailability {
     private Long id;
     private int availableCopies;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "book_id", insertable = false, updatable = false) // Don't insert or update this column
     private Book book;
+
+    @Column(name = "book_id") // Map bookId explicitly to the same column
+    private Long bookId;
+
+    private int orderedCopies;
+
 }

@@ -4,7 +4,8 @@ import * as Yup from "yup";
 import './AddBook.css';
 import { addBook } from '../../api/services/books';
 import { Book } from '../../types/books-types';
-
+import { showToast } from '../../utils/toastUtils';
+import { useLoaderContext } from '../../context/LoaderContext';
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -18,13 +19,20 @@ const validationSchema = Yup.object({
 });
 const AddBook = () => {
   const navigate = useNavigate();
+  const { showLoader, hideLoader } = useLoaderContext();
 
   const handleBackNav = () => {
     navigate("/");
   }
 
   const handleAddBooks = (data: Book) => {
-    addBook(data).then(() => handleBackNav());
+    showLoader();
+    addBook(data).then(() => {
+      handleBackNav();
+      showToast("Book added successfully!", 'success');
+    }).finally(() => {
+      hideLoader();
+    });
   }
 
   return (

@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface BookAvailabilityRepository extends JpaRepository<BookAvailability, Long> {
-    // Custom query to find availability by book
-    BookAvailability findByBook(Optional<Book> book);
+    // Custom query method to find BookAvailability by bookId
+    Optional<BookAvailability> findByBookId(Long bookId);
 }

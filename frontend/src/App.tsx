@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Books from './pages/books/Books';
 import BookDetails from './pages/book-details/BookDetails';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css'
 import Header from './components/Header/Header';
@@ -19,8 +21,10 @@ function App() {
           <Route path="/add-book/" element={<AddBook />} />
           <Route path="/login" element={<LoginForm />} />
         </Routes>
+        <ToastContainer />
       </div>
       <Loader />
+      
     </Router>
   );
 }

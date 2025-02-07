@@ -31,17 +31,6 @@ const Header = () => {
         <Link to="/">BookStore</Link>
       </div>
       <div className="right-container">
-        <form className="search-form" onSubmit={handleSearchSubmit}>
-          <input
-            type="text"
-            placeholder="Search for books..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-          <button type="submit">
-            <i className="fas fa-search"></i>
-          </button>
-        </form>
         <nav className="nav-links">
           <ul className='nav-ul'>
             <li>

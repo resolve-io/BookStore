@@ -8,4 +8,10 @@ export type Book = {
     publisher?: string;
     publishedDate?: Date | undefined;
     pages?: number;
+    availableCopies?: number
+}
+
+export type BookAvailability = {
+    bookId?: number;
+    availableCopies: number;
 }

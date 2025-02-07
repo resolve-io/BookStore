@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/availability")
+@RequestMapping("/api/v1/books/availability")
+@CrossOrigin()
 public class BookAvailabilityController {
 
     @Autowired
@@ -29,8 +30,9 @@ public class BookAvailabilityController {
         return bookAvailabilityService.saveBookAvailability(bookAvailability);
     }
 
-    @PutMapping("/update/{bookId}")
-    public BookAvailability updateAvailability(@PathVariable Long bookId, @RequestBody BookAvailability bookAvailability) {
-        return bookAvailabilityService.updateBookAvailability(bookId, bookAvailability);
+    @PutMapping("/order/{bookId}")
+    public BookAvailability updateBookAvailability(@RequestBody BookAvailability bookAvailability) {
+        int orderedCopies = bookAvailability.getOrderedCopies();
+        return bookAvailabilityService.updateBookAvailability(bookAvailability, orderedCopies);
     }
 }

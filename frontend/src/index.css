@@ -1,12 +1,11 @@
-:root {
+:root, body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   height: 100%;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(90deg, #aaacd8, transparent);
-
+  background: linear-gradient(90deg, #aaacd8, transparent) !important;
+  color: #121212;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -36,8 +35,8 @@ a {
   color: blue;
 }
 
-a:hover {
-  text-decoration: underline;
+.modal-dialog {
+  color: #213547;
 }
 
 

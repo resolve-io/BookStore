@@ -8,10 +8,12 @@
   }
   
   .book-card {
-    background: linear-gradient(45deg, #f7cab2, transparent);
+    /* background: linear-gradient(45deg, #a4abc7, transparent); */
+    background: #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f8f9fa;
   }
   
   .book-card:hover {
@@ -81,7 +83,7 @@
     background-color: #9ca821;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 6px 12px;
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
@@ -105,5 +107,16 @@
   .book-card-delete-action i {
     font-size: 1.8rem;
     z-index: 999999;
+  }
+
+  .book-stocks-availablity {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #121212;
+    gap: 5px;
   }
   

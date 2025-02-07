@@ -1,0 +1,27 @@
+.book-search-form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-search-form-container form {
+    display: flex;
+}
+
+.book-search-form-container .search-btn {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    right: 28px;
+    position: relative;
+    width: 46px;
+    height: 46px;
+    justify-content: center;
+    align-items: center;
+    display: flex
+;
+
+}

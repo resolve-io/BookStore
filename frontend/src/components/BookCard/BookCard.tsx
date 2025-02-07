@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import './BookCard.css';
 
 const BookCard = ({ book }) => {
-  const { title, author, price, description } = book;
+  const { title, author, price, description, availableCopies } = book;
   const navigate = useNavigate();
 
   const handleView = () => {
@@ -19,7 +19,10 @@ const BookCard = ({ book }) => {
         <p className="book-author">by {author}</p>
         <p className="book-price">${price}</p>
         <p className="book-description multi-line-ellipsis">{description}</p>
-        <button className="book-card-button" onClick={handleView}>View</button>
+        <span className='book-stocks-availablity'>
+          Hurry Up, Only {availableCopies} left!.
+          <button className="book-card-button" onClick={handleView}>View</button>
+        </span>
       </div>
     </div>
   );

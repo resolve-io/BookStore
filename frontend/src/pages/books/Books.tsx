@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../../components/BookCard/BookCard";
-import { deleteBook, fetchAllBooks } from "../../api/services/books";
+import { fetchAllBooks, fetchAllBooksBySearch } from "../../api/services/books";
 import { Book } from "../../types/books-types";
 
 import { useAuthContext } from "../../context/AuthContext";
 import { useLoaderContext } from "../../context/LoaderContext";
 
 import "./Books.css";
+import BookSearch from "../../components/BookSearch/BookSearch";
 
 
 const Books = () => {
@@ -17,17 +18,26 @@ const Books = () => {
   const { user } = useAuthContext();
   const { showLoader, hideLoader } = useLoaderContext();
 
-  const handleDeleteBook = async (bookId: number | undefined) => {
-    showLoader();
-    await deleteBook(bookId as number).then(() => {
-      getAllBooks();
-    }).finally(() => {
-      hideLoader();
-    });
-  };
-
   const handleAddBook = () => {
     navigate('/add-book');
+  }
+
+  const fetchBooksBySearch = async (searchTerm: string) => {
+    if (!searchTerm) return getAllBooks(); // Don't search if the search term is empty
+
+    showLoader();  // Assuming this is a function that shows a loader
+    try {
+      const books = await fetchAllBooksBySearch(searchTerm); // Call the correct function to fetch books
+      setBooks(books);
+    } catch (err) {
+      console.log(err); // Handle any error
+    } finally {
+      hideLoader(); // Assuming this hides the loader
+    }
+  }
+
+  const handleOnSearchBooks = (searchTerm: string) => {
+    fetchBooksBySearch(searchTerm);
   }
 
   // The callback to get all books
@@ -52,19 +62,13 @@ const Books = () => {
     <>
       { user && (
         <div className="user-actions-add-book">
+          <BookSearch onSearch={(searchTerm: string) => handleOnSearchBooks(searchTerm)} />
           <button className="buy-now-btn" onClick={handleAddBook}>Add Book</button>
         </div>
       )}
       <div className="book-list">
         {books?.map((book) => (
-          <div className="book-card-container" key={book.id}>
-            { user && (
-              <span className="book-card-delete-action" onClick={() => handleDeleteBook(book.id)}>
-                <i className="fa-solid fa-circle-xmark"></i>
-              </span>
-            )}
-            <BookCard book={book} />
-          </div>
+            <BookCard key={book.id} book={book} />
         ))}
       </div>
 

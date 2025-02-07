@@ -2,6 +2,7 @@ package com.resolve.bookstore.controller;
 
 import com.resolve.bookstore.model.Book;
 import com.resolve.bookstore.service.BookService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,5 +42,12 @@ public class BookController {
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
+    }
+
+    // Endpoint to search for books by title, description, or author
+    @GetMapping("/search")
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam String searchTerm) {
+        List<Book> books = bookService.searchBooks(searchTerm);
+        return ResponseEntity.ok(books);
     }
 }
