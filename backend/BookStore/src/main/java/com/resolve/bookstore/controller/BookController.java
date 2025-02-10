@@ -50,8 +50,11 @@ public class BookController {
 
     // Endpoint to search for books by title, description, or author
     @GetMapping("/search")
-    public ResponseEntity<List<Book>> searchBooks(@RequestParam String searchTerm) {
-        List<Book> books = bookService.searchBooks(searchTerm);
-        return ResponseEntity.ok(books);
+    public PaginatedResponse<Book> searchBooks(
+            @RequestParam String searchTerm,
+            @RequestParam(defaultValue = "0") int page,   // default to page 0
+            @RequestParam(defaultValue = "2") int size    // default to 10 items per page
+    ) {
+        return bookService.searchBooks(searchTerm, page, size);
     }
 }
