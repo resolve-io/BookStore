@@ -1,7 +1,6 @@
 package com.resolve.bookstore.component;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,8 +11,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.function.Function;
-
-import static  io.jsonwebtoken.Jwts.*;
 
 @Component
 public class JwtTokenUtil {
@@ -36,8 +33,8 @@ public class JwtTokenUtil {
                 .setHeaderParam("alg", "HS256")  // Signing algorithm
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))  // 1 hour expiration
-                .signWith(SignatureAlgorithm.HS256, jwtSecret)  // Sign the token with the secret key
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))  // 1 hour expiration
+                .signWith(getSecretKey())  // Sign the token with the SecretKey
                 .compact();
     }
 
@@ -55,13 +52,14 @@ public class JwtTokenUtil {
     private Claims extractAllClaims(String token) {
         SecretKey secretKey = getSecretKey(); // Ensure you use the secret key for parsing
 
-        // Use the parserBuilder() method if using version 0.11.0+ of jjwt
-        return Jwts.parser() // Use the parserBuilder() method
+        // Use the parserBuilder() method for jjwt 0.11.0 and later
+        return Jwts.parser()  // Use parserBuilder() instead of parser()
                 .setSigningKey(secretKey)  // Set the signing key
                 .build()  // Build the parser
-                .parseClaimsJwt(token)  // Parse the JWT and get the claims
+                .parseClaimsJws(token)  // Parse the JWT and get the claims
                 .getBody();  // Get the body of the JWT
     }
+
 
     // Validate if the token has expired
     public boolean isTokenExpired(String token) {

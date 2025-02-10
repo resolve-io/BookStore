@@ -11,7 +11,7 @@ import { authUser } from "../../api/services/auth";
 // Validation schema using Yup
 const validationSchema = Yup.object({
   username: Yup.string().min(3, "Username must be at least 3 characters").required("Username is required"),
-  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+  password: Yup.string().min(3, "Password must be at least 3 characters").required("Password is required"),
 });
 
 const LoginForm = () => {

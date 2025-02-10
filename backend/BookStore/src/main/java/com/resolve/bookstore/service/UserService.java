@@ -5,8 +5,10 @@ import com.resolve.bookstore.model.User;
 import com.resolve.bookstore.respository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -23,6 +25,10 @@ public class UserService {
     private JwtTokenUtil jwtTokenUtil;
 
     public void register(@Valid User user) {
+        Optional<User> dbUser = userRepository.findByUsername(user.getUsername());
+        if (dbUser.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, user.getUsername() + " already exists. Please try different username");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }

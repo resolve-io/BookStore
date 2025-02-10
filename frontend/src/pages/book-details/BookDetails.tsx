@@ -146,7 +146,7 @@ const BookDetails = () => {
               <div className="quantity-container">
                 <label className="">Quantity : </label>
                 <div className="quantity-controls">
-                  <button onClick={decrementQuantity}>-</button>
+                  <button onClick={decrementQuantity} disabled={!getBookCopies(book?.availableCopies)}>-</button>
                   <span>{quantity}</span>
                   {/* Input field to update quantity */}
                   {/* <input
@@ -156,7 +156,7 @@ const BookDetails = () => {
                     min="1"
                     style={{ width: "50px", textAlign: "center" }}
                   /> */}
-                  <button onClick={incrementQuantity}>+</button>
+                  <button onClick={incrementQuantity} disabled={!getBookCopies(book?.availableCopies)}>+</button>
                 </div>
               </div>
             )}
