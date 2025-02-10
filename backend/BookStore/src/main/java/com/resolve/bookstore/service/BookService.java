@@ -1,10 +1,14 @@
 package com.resolve.bookstore.service;
 
+import com.resolve.bookstore.dto.PaginatedResponse;
 import com.resolve.bookstore.model.Book;
 import com.resolve.bookstore.model.BookAvailability;
 import com.resolve.bookstore.respository.BookAvailabilityRepository;
 import com.resolve.bookstore.respository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,16 +27,16 @@ public class BookService {
     @Autowired
     private BookAvailabilityRepository bookAvailabilityRepository;
 
-    public List<Book> getAllBooks() {
-        List<Book> books = bookRepository.findAll();
+    public PaginatedResponse<Book> getAllBooks(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size); // Page starts from 0
+        Page<Book> books = bookRepository.findAll(pageable);
+
         // First, collect all book IDs into a list for batch querying availability.
         List<Long> bookIds = books.stream()
                 .filter(Objects::nonNull)
                 .map(Book::getId)
                 .collect(Collectors.toList());
 
-        System.out.println(bookIds);
-//        System.out.println(bookAvailabilityRepository.findAllById(bookIds));
         // Use batch fetching (a single database call) instead of calling findById for each book.
         Map<Long, Integer> availabilityMap = bookAvailabilityRepository.findAllByBookIdIn(bookIds)
                 .stream()
@@ -40,8 +44,7 @@ public class BookService {
 
 
         // Now, map the books with availability information.
-
-        return books.stream()
+        List<Book> availabilityBooks = books.stream()
             .filter(Objects::nonNull)
             .map(book -> {
                 // Get available copies from the availability map, defaulting to 0 if not present
@@ -58,6 +61,17 @@ public class BookService {
                         availableCopies
                 );
             }).toList();
+
+        // Get the total number of books
+        long totalCount = books.getTotalElements();
+
+        // Return the response (can be returned as JSON in a REST controller)
+        return new PaginatedResponse<>(
+                totalCount,     // Total elements (total books)
+                page,           // Current page
+                size,           // Page size
+                books.getContent()  // The list of books on the current page
+        );
     }
 
     public Optional<Book> getBookById(Long bookId) {

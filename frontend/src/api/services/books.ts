@@ -1,9 +1,12 @@
 import { Book } from '../../types/books-types';
+import { PaginatedResponse, PaginationParams } from '../../types/common-types';
 import axiosInstance from '../axiosInstance';
 
-const fetchAllBooks = async () => {
+const fetchAllBooks = async (params: PaginationParams) => {
     try {
-        const response = await axiosInstance.get<Book[]>('/books/all');
+        const response = await axiosInstance.get<PaginatedResponse<Book>>('/books/all', {
+            params: params
+        });
         return response.data;
     } catch (err) {
         return Promise.reject(err);
@@ -39,7 +42,7 @@ const deleteBook = async (bookId: number) => {
 
 const fetchAllBooksBySearch = async (search: string) => {
     try {
-        const response = await axiosInstance.get<Book[]>(`/books/search`, { params: { searchTerm: search }});
+        const response = await axiosInstance.get<PaginatedResponse<Book>>(`/books/search`, { params: { searchTerm: search }});
         return response.data;
     } catch (err) {
         return Promise.reject(err);

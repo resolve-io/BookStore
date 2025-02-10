@@ -1,5 +1,6 @@
 package com.resolve.bookstore.controller;
 
+import com.resolve.bookstore.dto.PaginatedResponse;
 import com.resolve.bookstore.model.Book;
 import com.resolve.bookstore.service.BookService;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,11 @@ public class BookController {
     }
 
     @GetMapping("/all")
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    public PaginatedResponse<Book> getAllBooks(
+        @RequestParam(defaultValue = "0") int page,   // default to page 0
+        @RequestParam(defaultValue = "2") int size    // default to 10 items per page
+    ) {
+        return bookService.getAllBooks(page, size);
     }
 
     @GetMapping("/{id}")

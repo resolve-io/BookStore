@@ -13,5 +13,5 @@ export type Book = {
 
 export type BookAvailability = {
     bookId?: number;
-    availableCopies: number;
+    availableCopies?: number;
 }

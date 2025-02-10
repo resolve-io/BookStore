@@ -62,6 +62,9 @@
     margin-bottom: 20px;
   }
 
+  .book-detail-availableCopies-container .no-copies {
+    color: #ee0f5b;
+  }
   .book-detail-availableCopies {
     font-size: 1.1rem;
     color: #444;
@@ -109,7 +112,7 @@
   }
 
   .manage-stocks-btn {
-    background-color: var(--toastify-color-progress-info);
+    background-color: #c2185b;
     color: white;
     font-size: 1rem;
     padding: 10px 15px;

@@ -5,12 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69cc6dde-eaa0-4af6-bfeb-388d65f525b0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/component/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/component/JwtTokenUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/configuration/AuthManagerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/configuration/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/dto/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.trace.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/BookAvailabilityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/BookAvailabilityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/respository/BookRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BookStore/BookStoreDataBase.trace.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BookStore/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/BookStoreApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/java/com/resolve/bookstore/BookStoreApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BookStore/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BookStore/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/book-details/BookDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/book-details/BookDetails.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/book-details/BookDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/book-details/BookDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/types/books-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/books-types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,20 +53,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/palanivelrajendiran/workspace/bookstore",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/palanivelrajendiran/workspace/bookstore&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -72,6 +85,7 @@
       <updated>1738478332454</updated>
       <workItem from="1738478333468" duration="3000" />
       <workItem from="1738564653363" duration="620000" />
+      <workItem from="1739168634594" duration="47000" />
     </task>
     <servers />
   </component>

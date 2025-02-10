@@ -1,10 +1,14 @@
-.user-actions-add-book {
+.user-actions-add-book, .paginations-list {
     display: flex;
     gap: 20px;
     padding: 20px;
     margin: 0 auto;
     max-width: 1200px;
     justify-content: space-between;
+}
+
+.paginations-list {
+    justify-content: flex-end !important
 }
 
 .store-empty {

@@ -12,10 +12,16 @@ const validationSchema = Yup.object({
   title: Yup.string().required("Title is required"),
   author: Yup.string().required("Author is required"),
   description: Yup.string().required("Description is required"),
-  price: Yup.number().required("Price is required"),
+  price: Yup.number().required("Price is required")
+  .positive()
+  .integer()
+  .min(0, "Min is 0"),
   publisher: Yup.string().required("Publisher is required"),
   publishedDate: Yup.date().required("Published date is required"),
-  pages: Yup.number().required("Pages is required"),
+  pages: Yup.number().required("Pages is required")
+  .positive()
+  .integer()
+  .min(0, "Min is 0"),
 });
 const AddBook = () => {
   const navigate = useNavigate();
@@ -72,6 +78,7 @@ const AddBook = () => {
                     id="title"
                     name="title"
                     className="form-control"
+                    placeholder="Enter book title"
                   />
                   <ErrorMessage name="title" component="div" className="error-message" />
                 </div>
@@ -83,6 +90,7 @@ const AddBook = () => {
                     id="author"
                     name="author"
                     className="form-control"
+                    placeholder="Enter book author"
                   />
                   <ErrorMessage name="author" component="div" className="error-message" />
                 </div>
@@ -103,10 +111,11 @@ const AddBook = () => {
                 <div className="form-group">
                   <label htmlFor="genre">Price</label>
                   <Field
-                    type="text"
+                    type="number"
                     id="price"
                     name="price"
                     className="form-control"
+                    placeholder="Enter price"
                   />
                   <ErrorMessage name="price" component="div" className="error-message" />
                 </div>
@@ -118,6 +127,7 @@ const AddBook = () => {
                     id="publisher"
                     name="publisher"
                     className="form-control"
+                    placeholder="Enter book publisher"
                   />
                   <ErrorMessage name="publisher" component="div" className="error-message" />
                 </div>
@@ -136,10 +146,11 @@ const AddBook = () => {
                 <div className="form-group">
                   <label htmlFor="genre">Total Pages</label>
                   <Field
-                    type="text"
+                    type="number"
                     id="pages"
                     name="pages"
                     className="form-control"
+                    placeholder="Number of pages"
                   />
                   <ErrorMessage name="pages" component="div" className="error-message" />
                 </div>

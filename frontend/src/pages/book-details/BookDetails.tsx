@@ -10,6 +10,7 @@ import CommonModal from '../../components/CommonModal/CommonModal';
 import ManageBookStockForm from '../../components/ManageBookStocks/ManageBookStockForm';
 import { manageBookStock } from '../../api/services/book-availability';
 import { placeOrder } from '../../api/services/order';
+import { number } from 'yup';
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -100,6 +101,10 @@ const BookDetails = () => {
     });
   }, []);
 
+  const getBookCopies = (_bookAvailability: number | undefined) => {
+    return _bookAvailability && _bookAvailability > 0;
+  }
+
   useEffect(() => {
     fetchBookById();
   }, []);
@@ -125,9 +130,11 @@ const BookDetails = () => {
             </div>
             <p className="book-detail-price">${book?.price}</p>
             <div className="book-detail-availableCopies-container">
-              <p className="book-detail-availableCopies">Stocks: {book?.availableCopies}</p>
-              { user && (
-                <button className="manage-stocks-btn" onClick={handleManageBookStocks}>Manage Stocks</button>
+              { getBookCopies(book?.availableCopies) === true && (
+                <span>Hurry Up, Only {book?.availableCopies} left!.</span>
+              )}
+              { !getBookCopies(book?.availableCopies) && (
+                <span className='no-copies'>Out of Stock!.</span>
               )}
             </div>
             <p className="book-detail-description">{book?.description}</p>
@@ -135,26 +142,33 @@ const BookDetails = () => {
             <p className="book-detail-year">Published Date: <span className='book-detail-values'>{formattedPublishedDate}</span></p>
             <p className="book-detail-pages">Pages: <span className='book-detail-values'>{book?.pages}</span></p>
             
-            <div className="quantity-container">
-              <label className="">Quantity : </label>
-              <div className="quantity-controls">
-                <button onClick={decrementQuantity}>-</button>
-                <span>{quantity}</span>
-                {/* Input field to update quantity */}
-                {/* <input
-                  type="number"
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                  min="1"
-                  style={{ width: "50px", textAlign: "center" }}
-                /> */}
-                <button onClick={incrementQuantity}>+</button>
+            { !user && (
+              <div className="quantity-container">
+                <label className="">Quantity : </label>
+                <div className="quantity-controls">
+                  <button onClick={decrementQuantity}>-</button>
+                  <span>{quantity}</span>
+                  {/* Input field to update quantity */}
+                  {/* <input
+                    type="number"
+                    value={quantity}
+                    onChange={handleQuantityChange}
+                    min="1"
+                    style={{ width: "50px", textAlign: "center" }}
+                  /> */}
+                  <button onClick={incrementQuantity}>+</button>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="book-detail-actions">
               {/* <button className="add-to-cart-btn">Add to Cart</button> */}
-              <button className="buy-now-btn" onClick={handleBuyNow} disabled={!quantity}>Buy Now</button>
+              { user && (
+                <button className="manage-stocks-btn" onClick={handleManageBookStocks}>Manage Stocks</button>
+              )}
+              { !user && (
+                <button className="buy-now-btn" onClick={handleBuyNow} disabled={!quantity}>Buy Now</button>
+              )}
             </div>
           </div>
         </div>

@@ -27,13 +27,14 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, []);
 
-  const login = async (userData: AuthUser) => {
-    if (userData.password !== 'admin098' || userData.email !== 'admin@resolve.io') {
-      throw new Error("Login failed!");
-    }
+  const saveAuthUser = (userData: AuthUser) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));  // Store user in localStorage
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Make it asynchronous
+  };
+
+  const login = (userData: AuthUser) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));  // Store user in localStorage
   };
 
   const logout = async () => {
@@ -45,6 +46,7 @@ export const AuthProvider = ({ children }) => {
   const value:AuthContextType = {
     user,
     loading,
+    saveAuthUser,
     login,
     logout
   };

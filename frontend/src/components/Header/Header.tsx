@@ -42,7 +42,7 @@ const Header = () => {
             {user ? (
               <li className="dropdown">
                 <Link to="#" className="dropdown-toggle">
-                  {user.email}
+                  {user.username}
                 </Link>
                 <ul className="dropdown-menu user-menu">
                   {/* <li>

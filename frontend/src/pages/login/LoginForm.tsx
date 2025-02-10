@@ -6,10 +6,11 @@ import { useAuthContext } from "../../context/AuthContext";
 import { AuthUser } from "../../types/auth-types";
 import { useLoaderContext } from "../../context/LoaderContext";
 import { useState } from "react";
+import { authUser } from "../../api/services/auth";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
-  email: Yup.string().email("Invalid email format").required("Email is required"),
+  username: Yup.string().min(3, "Username must be at least 3 characters").required("Username is required"),
   password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
 });
 
@@ -17,22 +18,22 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [authErrorMessage, setAuthErrorMessage] = useState<string | null>(null);
 
-  const { login } = useAuthContext();
+  const { saveAuthUser } = useAuthContext();
   const { showLoader, hideLoader } = useLoaderContext();
 
-  const handleSubmit = async (cred: AuthUser) => {
+  const handleSubmit = async (user: AuthUser) => {
     showLoader();
     // Here, you would send a request to the backend to authenticate the user
     // For this example, let's assume a successful login:
+    showLoader();  // Assuming this is a function that shows a loader
     try {
-      await login(cred).then(() => {
-        hideLoader();
-        navigate("/");
-      });
+      const authToken = await authUser(user); // Call the correct function to fetch books
+      saveAuthUser({...user, authToken})
+      navigate("/");
     } catch {
-      setAuthErrorMessage("Invalid email or password")
+      setAuthErrorMessage("Invalid username or password")
     } finally {
-      hideLoader();
+      hideLoader(); // Assuming this hides the loader
     }
   };
 
@@ -42,7 +43,7 @@ const LoginForm = () => {
         <h2>Login</h2>
         <Formik
           initialValues={{
-            email: "",
+            username: "",
             password: "",
           }}
           validationSchema={validationSchema}
@@ -52,15 +53,15 @@ const LoginForm = () => {
         >
           <Form className="login-form">
             <div className="login-form-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="username">username</label>
               <Field
-                type="email"
-                id="email"
-                name="email"
+                type="username"
+                id="username"
+                name="username"
                 className="form-control"
-                placeholder="Enter your email"
+                placeholder="Enter your username"
               />
-              <ErrorMessage name="email" component="div" className="error-message" />
+              <ErrorMessage name="username" component="div" className="error-message" />
             </div>
 
             <div className="login-form-group">
