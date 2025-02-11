@@ -69,7 +69,7 @@ This UI allows you to interact with and test the API endpoints directly.
 
 
 
-#FrontEnd
+# FrontEnd
 
 ## Accessing UI
 
@@ -88,6 +88,8 @@ This UI allows you to interact with and test the API endpoints directly.
     npm run dev
 ```
 
+```bash
 Node Version: 23+
 React: 18+
 TypeScript: 5.6+
+```
