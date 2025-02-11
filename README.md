@@ -69,4 +69,25 @@ This UI allows you to interact with and test the API endpoints directly.
 
 
 
+#FrontEnd
 
+## Accessing UI
+
+```bash
+    cd frontend
+```
+
+## Install npm dependency
+```bash
+    npm install
+```
+
+## Start the Dev Server
+```bash
+    cd frontend
+    npm run dev
+```
+
+Node Version: 23+
+React: 18+
+TypeScript: 5.6+
