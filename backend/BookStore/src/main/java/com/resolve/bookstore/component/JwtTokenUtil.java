@@ -3,6 +3,7 @@ package com.resolve.bookstore.component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -18,22 +19,23 @@ public class JwtTokenUtil {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    private final long JWT_EXPIRATION = 1000 * 60 * 60;  // Token expiration time (1 hour)
-
     // Method to convert String secret to SecretKey
     private SecretKey getSecretKey() {
         byte[] secretBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
-        return new SecretKeySpec(secretBytes, SignatureAlgorithm.HS256.getJcaName());
+        return Keys.hmacShaKeyFor(secretBytes);
     }
 
     // Generate a JWT token for the user
     public String generateJwtToken(String username) {
+        // Token expiration time (1 hour)
+        long JWT_EXPIRATION = 1000 * 60 * 60;
+
         return Jwts.builder()
-                .setHeaderParam("typ", "JWT")  // Optional, defaults to JWT
-                .setHeaderParam("alg", "HS256")  // Signing algorithm
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))  // 1 hour expiration
+                .header().add("typ", "JWT")  // Optional, defaults to JWT
+                .add("alg", "HS256").and()  // Signing algorithm
+                .subject(username)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))  // 1 hour expiration
                 .signWith(getSecretKey())  // Sign the token with the SecretKey
                 .compact();
     }
@@ -54,10 +56,10 @@ public class JwtTokenUtil {
 
         // Use the parserBuilder() method for jjwt 0.11.0 and later
         return Jwts.parser()  // Use parserBuilder() instead of parser()
-                .setSigningKey(secretKey)  // Set the signing key
+                .verifyWith(secretKey)  // Set the signing key
                 .build()  // Build the parser
-                .parseClaimsJws(token)  // Parse the JWT and get the claims
-                .getBody();  // Get the body of the JWT
+                .parseSignedClaims(token)  // Parse the JWT and get the claims
+                .getPayload();  // Get the body of the JWT
     }
 
 

@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     // In a real-world scenario, inject a repository to get user data from the database.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.resolve.bookstore.model.User user = userRepository.findByUsername(username)
+        var user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
         return User.builder()

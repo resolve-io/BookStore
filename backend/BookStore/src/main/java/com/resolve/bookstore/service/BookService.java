@@ -5,16 +5,22 @@ import com.resolve.bookstore.model.Book;
 import com.resolve.bookstore.model.BookAvailability;
 import com.resolve.bookstore.respository.BookAvailabilityRepository;
 import com.resolve.bookstore.respository.BookRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -26,10 +32,26 @@ public class BookService {
 
     private static final Logger logger = LoggerFactory.getLogger(BookService.class);
 
-    @Autowired
-    private BookRepository bookRepository;
-    @Autowired
-    private BookAvailabilityRepository bookAvailabilityRepository;
+    private final BookRepository bookRepository;
+    private final BookAvailabilityRepository bookAvailabilityRepository;
+    private final DataSource dataSource;
+
+    public BookService(BookRepository bookRepository, BookAvailabilityRepository bookAvailabilityRepository, DataSource dataSource) {
+        this.bookRepository = bookRepository;
+        this.bookAvailabilityRepository = bookAvailabilityRepository;
+        this.dataSource = dataSource;
+    }
+
+    @PostConstruct
+    public void init() {
+        if (bookRepository.count() == 0) {
+            logger.info("Populating database with initial book data");
+            Resource resource = new ClassPathResource("books.sql");
+            ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
+            // Execute against the data source
+            DatabasePopulatorUtils.execute(databasePopulator, dataSource);
+        }
+    }
 
     // Private method to handle pagination and availability mapping
     private PaginatedResponse<Book> getPaginatedBooks(int page, int size, Page<Book> books) {
@@ -110,7 +132,7 @@ public class BookService {
 
     public Book updateBook(Long id, Book bookDetails) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book with id " + id + " not found."));
 
         // Update book properties
         book.setTitle(bookDetails.getTitle());
@@ -125,10 +147,8 @@ public class BookService {
     }
 
     public void deleteBook(Long id) {
-        if (!bookRepository.existsById(id)) {
+        bookRepository.findById(id).ifPresentOrElse(bookRepository::delete, () -> {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book with id " + id + " not found.");
-        }
-
-        bookRepository.deleteById(id);
+        });
     }
 }

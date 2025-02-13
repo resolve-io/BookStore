@@ -12,8 +12,11 @@ import java.util.List;
 @CrossOrigin()
 public class BookAvailabilityController {
 
-    @Autowired
-    private BookAvailabilityService bookAvailabilityService;
+    private final BookAvailabilityService bookAvailabilityService;
+
+    public BookAvailabilityController(BookAvailabilityService bookAvailabilityService) {
+        this.bookAvailabilityService = bookAvailabilityService;
+    }
 
     @GetMapping("/all")
     public List<BookAvailability> getAllAvailability() {

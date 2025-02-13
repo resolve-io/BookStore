@@ -16,24 +16,25 @@ import java.util.Optional;
 @Service
 public class OrderService {
 
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
-    @Autowired
-    private BookAvailabilityRepository bookAvailabilityRepository;
-    @Autowired
-    private OrderRepository orderRepository;
+    private final BookAvailabilityRepository bookAvailabilityRepository;
+
+    private final OrderRepository orderRepository;
+
+    public OrderService(BookRepository bookRepository, BookAvailabilityRepository bookAvailabilityRepository, OrderRepository orderRepository) {
+        this.bookRepository = bookRepository;
+        this.bookAvailabilityRepository = bookAvailabilityRepository;
+        this.orderRepository = orderRepository;
+    }
 
     public Order placeOrder(Long bookId, int quantityOrdered) {
         // Check if the book exists
-        Optional<Book> book = bookRepository.findById(bookId);
-        if (book.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book with id " + bookId + " not found.");
-        }
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book with id " + bookId + " not found."));
 
         // Create a new order
         Order newOrder = new Order();
-        newOrder.setBook(book.get());
+        newOrder.setBook(book);
         newOrder.setQuantity(quantityOrdered);
 
         // Check if there are enough copies available to fulfill the order
