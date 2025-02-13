@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import './BookCard.css';
+import { Book } from '../../types/books-types';
 
-const BookCard = ({ book }) => {
+interface BookCardProps {
+  book: Book;
+}
+const BookCard: React.FC<BookCardProps>  = ({ book }) => {
   const { title, author, price, description, availableCopies } = book;
   const navigate = useNavigate();
 
@@ -20,7 +24,7 @@ const BookCard = ({ book }) => {
         <p className="book-price">${price}</p>
         <p className="book-description multi-line-ellipsis">{description}</p>
         <span className='book-stocks-availablity'>
-          { availableCopies > 0 && <span>Hurry Up, Only {availableCopies} left!.</span> }
+          { availableCopies && availableCopies > 0 && <span>Hurry Up, Only {availableCopies} left!.</span> }
           { !availableCopies && <span className='no-copies'>Out of Stock!.</span> }
           <button className="book-card-button" onClick={handleView}>View</button>
         </span>

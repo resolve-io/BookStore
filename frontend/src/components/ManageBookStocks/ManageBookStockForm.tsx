@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import "./ManageBookStockForm.css"
 
-const ManageBookStockForm = ({ bookInfo, onSubmit }) => {
+const ManageBookStockForm = ({ bookInfo, onSubmit }: any) => {
   // Formik initial values
   const initialValues = {
     bookAvailability: ''
@@ -17,7 +18,7 @@ const ManageBookStockForm = ({ bookInfo, onSubmit }) => {
   });
 
   // Submit handler
-  const handleSubmit = ({bookAvailability}) => {
+  const handleSubmit = ({bookAvailability}: any) => {
     onSubmit(bookAvailability);
   };
 

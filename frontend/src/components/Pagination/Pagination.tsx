@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pagination, Dropdown } from 'react-bootstrap';
 
-const PaginationComponent = ({ currentPage, totalPages, onPageChange, pageSize, onPageSizeChange }) => {
+const PaginationComponent = ({ currentPage, totalPages, onPageChange, pageSize, onPageSizeChange }: any) => {
   
   const totalPageNumbers = Math.ceil(totalPages / pageSize);
 
-  const handlePageClick = (page) => {
+  const handlePageClick = (page: number) => {
     onPageChange(page);
   };
 
@@ -20,7 +21,7 @@ const PaginationComponent = ({ currentPage, totalPages, onPageChange, pageSize, 
     }
   };
 
-  const handlePageSizeChange = (newSize) => {
+  const handlePageSizeChange = (newSize: number) => {
     onPageSizeChange(newSize);
   };
 

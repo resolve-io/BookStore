@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Modal, Button } from 'react-bootstrap';
 
-const CommonModal = ({ show, onClose, title, children, onConfirm, confirmText = 'Confirm', showFooter = true }) => {
+const CommonModal = ({ show, onClose, title, children, onConfirm, confirmText = 'Confirm', showFooter = true }: any) => {
   return (
     <Modal show={show} onHide={onClose} dialogClassName="modal-40w">
       <Modal.Header closeButton>

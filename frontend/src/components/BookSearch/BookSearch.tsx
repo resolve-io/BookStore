@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Formik, Field, Form } from 'formik';
 import "./BookSearch.css"
 import { debounce } from 'lodash'
 
 
-const BookSearch = ({ onSearch }) => {
+const BookSearch = ({ onSearch }: any) => {
 
   // Debounced function to call fetchData
   const debouncedFetchBooks = debounce((searchQuery:string) => {
@@ -27,7 +28,7 @@ const BookSearch = ({ onSearch }) => {
                 name="searchTerm"
                 type="text"
                 value={values.searchTerm}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   handleChange(e); // Formik's default onChange
                   debouncedFetchBooks(e.target.value); // Update searchTerm state
                 }}

@@ -6,7 +6,7 @@ export type Book = {
     price: number;
     image?: string;
     publisher?: string;
-    publishedDate?: Date | undefined;
+    publishedDate?: Date | undefined | string;
     pages?: number;
     availableCopies?: number
 }

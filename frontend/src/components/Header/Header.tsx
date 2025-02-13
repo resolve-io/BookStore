@@ -1,23 +1,12 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import { useAuthContext } from '../../context/AuthContext';
 import { useLoaderContext } from '../../context/LoaderContext';
 
 const Header = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const { user, logout } = useAuthContext();
   const { showLoader, hideLoader } = useLoaderContext();
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    // Implement search logic (e.g., filter books or redirect to a search results page)
-    console.log('Searching for:', searchQuery);
-  };
 
   const handleLogout = async () => {
     showLoader();

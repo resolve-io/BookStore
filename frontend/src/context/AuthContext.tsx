@@ -1,23 +1,30 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import { AuthContextType, AuthUser } from '../types/auth-types';
 
 // Create a Context
-const AuthContext = createContext(null);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 // Custom hook to access AuthContext
-export const useAuthContext = () => {
-  return useContext(AuthContext);
+export const useAuthContext = (): AuthContextType => {
+  const context = useContext(AuthContext);
+
+  // Ensure the context is not null and provide error handling
+  if (!context) {
+    throw new Error('useAuthContext must be used within an AuthProvider');
+  }
+
+  return context; // The context is guaranteed to have `user`, `login`, and `logout`
 };
 
 // AuthProvider component to wrap your app with authentication state
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children } : { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);  // User state to hold auth info
   const [loading, setLoading] = useState(true);  // State to track if data is loading
 
   // Simulating fetching the user data (e.g., from localStorage or API)
   useEffect(() => {
     const fetchUser = async () => {
-      const storedUser = JSON.parse(localStorage.getItem('user') as any);
+      const storedUser = JSON.parse(localStorage.getItem('user') as string);
       if (storedUser) {
         setUser(storedUser);
       }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../../components/BookCard/BookCard";
@@ -18,8 +17,8 @@ const Books = () => {
 
   const navigate = useNavigate();
   const [listOfBooks, setListOfBooks] = useState<PaginatedResponse<Book> | null>(null);
-  const { user }: any = useAuthContext();
-  const { showLoader, hideLoader }: any = useLoaderContext();
+  const { user } = useAuthContext();
+  const { showLoader, hideLoader } = useLoaderContext();
 
   const [pageSize, setPageSize] = useState<number>(5);
   const [currentPage, setCurrentPage] = useState(0);

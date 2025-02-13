@@ -60,13 +60,13 @@ const AddBook = () => {
                 title: "",
                 author: "",
                 description: "",
-                price: "",
+                price: 0,
                 publisher: "",
                 publishedDate: "",
-                pages: ""
+                pages: 0
               }}
               validationSchema={validationSchema}
-              onSubmit={(values) => {
+              onSubmit={(values: Book) => {
                 handleAddBooks(values)
               }}
             >

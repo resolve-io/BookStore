@@ -1,5 +1,5 @@
 export type LoaderContextType = {
-    isLoading: boolean;
+    isLoading?: boolean;
     showLoader: () => void;
     hideLoader: () => void;
 }

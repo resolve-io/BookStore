@@ -1,14 +1,22 @@
-import { Children, createContext, useContext, useState } from "react";
+import {createContext, ReactNode, useContext, useState } from "react";
 import { LoaderContextType } from "../types/loader.types";
 
 
-const LoaderContext = createContext(null);
+const LoaderContext = createContext<LoaderContextType | null>(null);
 
-export const useLoaderContext = () => {
-    return useContext(LoaderContext);
+// Custom hook to access AuthContext
+export const useLoaderContext = (): LoaderContextType => {
+  const context = useContext(LoaderContext);
+
+  // Ensure the context is not null and provide error handling
+  if (!context) {
+    throw new Error('useAuthContext must be used within an AuthProvider');
+  }
+
+  return context; // The context is guaranteed to have `user`, `login`, and `logout`
 };
 
-const LoaderProvider = ({ children }) => {
+const LoaderProvider = ({ children } : { children: ReactNode }) => {
     const [isLoading, setIsLoading] = useState(false);
 
 

@@ -10,7 +10,6 @@ import CommonModal from '../../components/CommonModal/CommonModal';
 import ManageBookStockForm from '../../components/ManageBookStocks/ManageBookStockForm';
 import { manageBookStock } from '../../api/services/book-availability';
 import { placeOrder } from '../../api/services/order';
-import { number } from 'yup';
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -35,13 +34,13 @@ const BookDetails = () => {
   };
 
    // Handle manual input change
-   const handleQuantityChange = (event) => {
-    const value = event.target.value;
-    // Make sure the input is a valid positive number
-    if (value === "" || /^[1-9][0-9]*$/.test(value)) {
-      setQuantity(Number(value));
-    }
-  };
+  //  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = event.target.value;
+  //   // Make sure the input is a valid positive number
+  //   if (value === "" || /^[1-9][0-9]*$/.test(value)) {
+  //     setQuantity(Number(value));
+  //   }
+  // };
 
   const handleBackNav = () => {
     navigate("/");

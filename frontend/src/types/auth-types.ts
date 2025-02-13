@@ -1,6 +1,7 @@
 export type AuthUser = {
-    email: string;
+    username: string;
     password: string;
+    authToken?: string
 }
 
 export type AuthContextType = {
