@@ -10,13 +10,4 @@ const manageBookStock = async (payload: BookAvailability) => {
     }
 }
 
-const updateBookStockOnBuy = async (bookId: number) => {
-    try {
-        const response = await axiosInstance.delete<BookAvailability>(`/books/${bookId}`);
-        return response.data;
-    } catch (err) {
-        return Promise.reject(err);
-    }
-}
-
-export { manageBookStock, updateBookStockOnBuy}
+export { manageBookStock}

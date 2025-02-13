@@ -33,15 +33,6 @@ const BookDetails = () => {
     }
   };
 
-   // Handle manual input change
-  //  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = event.target.value;
-  //   // Make sure the input is a valid positive number
-  //   if (value === "" || /^[1-9][0-9]*$/.test(value)) {
-  //     setQuantity(Number(value));
-  //   }
-  // };
-
   const handleBackNav = () => {
     navigate("/");
   }
@@ -54,10 +45,10 @@ const BookDetails = () => {
     setShowManageBookStocksModal(false);
   }
 
-  const onSubmitManageBookStocks = (uodateAvailableCopies: number) => {
+  const onSubmitManageBookStocks = (updateAvailableCopies: number) => {
     const payload: BookAvailability = {
       bookId: book?.id,
-      availableCopies: uodateAvailableCopies
+      availableCopies: updateAvailableCopies
     }
     showLoader();
     manageBookStock(payload).then(() => {
@@ -147,14 +138,6 @@ const BookDetails = () => {
                 <div className="quantity-controls">
                   <button onClick={decrementQuantity} disabled={!getBookCopies(book?.availableCopies)}>-</button>
                   <span>{quantity}</span>
-                  {/* Input field to update quantity */}
-                  {/* <input
-                    type="number"
-                    value={quantity}
-                    onChange={handleQuantityChange}
-                    min="1"
-                    style={{ width: "50px", textAlign: "center" }}
-                  /> */}
                   <button onClick={incrementQuantity} disabled={!getBookCopies(book?.availableCopies)}>+</button>
                 </div>
               </div>

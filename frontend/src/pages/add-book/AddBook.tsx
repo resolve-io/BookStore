@@ -55,7 +55,7 @@ const AddBook = () => {
 
         <div className="add-book-body">
           <div className="form-container">
-            <Formik
+            <Formik<Book>
               initialValues={{
                 title: "",
                 author: "",
@@ -67,7 +67,7 @@ const AddBook = () => {
               }}
               validationSchema={validationSchema}
               onSubmit={(values: Book) => {
-                handleAddBooks(values)
+                handleAddBooks(values as Book)
               }}
             >
               <Form>

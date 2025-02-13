@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(
       const authUser = localStorage.getItem('user');  // Adjust this as per your token storage
       const parseAuthUser = authUser ? JSON.parse(authUser) : null; 
       if (parseAuthUser) {
-        // config.headers['Authorization'] = `Bearer ${parseAuthUser.authToken}`; // Attach the token
+        config.headers['Authorization'] = `Bearer ${parseAuthUser.authToken}`; // Attach the token
       }
   
       return config;

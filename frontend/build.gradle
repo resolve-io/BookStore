@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+        maven { url = "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath "com.github.node-gradle:gradle-node-plugin:7.0.1"
+    }
+}
+
+apply plugin: "com.github.node-gradle.node"
+apply plugin: 'java'
+
+node {
+    version = '23.7.0'
+    download = true
+}
+
+tasks.register('npmCi', NpmTask) {
+    def path = projectDir.toPath()
+    inputs.dir(path.resolve("src"))
+    outputs.dirs(path.resolve("node_modules"), path.resolve("dist"))
+
+    args = ['ci']
+}
+
+tasks.register('npmBuild', NpmTask) {
+    dependsOn npmCi
+    args = [ 'run', 'build' ]
+}
+
+jar {
+    dependsOn npmBuild
+    from 'dist'
+    eachFile { details ->
+        details.path = details.path.startsWith('META-INF') ?: 'static/' + details.path
+    }
+    includeEmptyDirs = false
+
+    doFirst{
+        def indexHtml = file("${projectDir}/dist/index.html")
+        if (!indexHtml.exists()) {
+            throw new GradleException('There is something wrong with UI build process. index.html is missing!')
+        }
+    }
+}

@@ -41,7 +41,7 @@ const LoginForm = () => {
     <div className="login-wrapper">
       <div className="login-container">
         <h2>Login</h2>
-        <Formik
+        <Formik<AuthUser>
           initialValues={{
             username: "",
             password: "",
