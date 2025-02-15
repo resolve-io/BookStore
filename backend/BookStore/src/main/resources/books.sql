@@ -1,3 +1,5 @@
+ALTER TABLE PUBLIC.BOOK ALTER COLUMN id RESTART WITH 12;
+
 insert into PUBLIC.BOOK (ID, AUTHOR, AVAILABLE_COPIES, DESCRIPTION, PAGES, PRICE, PUBLISHED_DATE, PUBLISHER, TITLE)
 values  (1, 'F. Scott Fitzgerald', 0, 'A book description is a summary of a book''s content that''s intended to entice readers to buy it.', 240, 300, null, 'Scott Publishers', 'The Great Gatsby'),
         (2, 'William Shakespeare', 0, 'A book description is a summary of a book''s content that''s intended to entice readers to buy it.', 450, 400, null, 'William Publishers', 'The Merchant of Venice'),
