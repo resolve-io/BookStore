@@ -3,10 +3,10 @@ package com.resolve.bookstore.controller;
 import com.resolve.bookstore.dto.PaginatedResponse;
 import com.resolve.bookstore.model.Book;
 import com.resolve.bookstore.service.BookService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,10 +22,14 @@ public class BookController {
 
     @GetMapping("/all")
     public PaginatedResponse<Book> getAllBooks(
-        @RequestParam(defaultValue = "0") int page,   // default to page 0
-        @RequestParam(defaultValue = "2") int size    // default to 10 items per page
-    ) {
-        return bookService.getAllBooks(page, size);
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "2") int size,
+    Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return bookService.getAllBooks(PageRequest.of(page, size));
+        } else {
+            return bookService.getAvailableBooks(PageRequest.of(page, size));
+        }
     }
 
     @GetMapping("/{id}")
@@ -55,6 +59,6 @@ public class BookController {
             @RequestParam(defaultValue = "0") int page,   // default to page 0
             @RequestParam(defaultValue = "2") int size    // default to 10 items per page
     ) {
-        return bookService.searchBooks(searchTerm, page, size);
+        return bookService.searchBooks(searchTerm, PageRequest.of(page, size));
     }
 }

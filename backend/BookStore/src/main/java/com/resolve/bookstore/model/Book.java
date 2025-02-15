@@ -26,6 +26,9 @@ public class Book {
     private String publisher;
     private Date publishedDate;
     private int pages;
+
+    // This is not stored in the database
+    @Transient
     private int availableCopies;
 
     // Getters and Setters

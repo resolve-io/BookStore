@@ -54,7 +54,7 @@ public class BookService {
     }
 
     // Private method to handle pagination and availability mapping
-    private PaginatedResponse<Book> getPaginatedBooks(int page, int size, Page<Book> books) {
+    private PaginatedResponse<Book> getPaginatedBooks(Pageable pageable, Page<Book> books) {
         List<Long> bookIds = books.stream()
                 .filter(Objects::nonNull)
                 .map(Book::getId)
@@ -85,22 +85,20 @@ public class BookService {
 
         return new PaginatedResponse<>(
                 books.getTotalElements(),  // Total elements (total books)
-                page,                      // Current page
-                size,                      // Page size
+                pageable.getPageNumber(),                      // Current page
+                pageable.getPageSize(),                      // Page size
                 availabilityBooks          // The list of books on the current page with availability
         );
     }
 
-    public PaginatedResponse<Book> getAllBooks(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public PaginatedResponse<Book> getAllBooks(Pageable pageable) {
         Page<Book> books = bookRepository.findAll(pageable);
-        return getPaginatedBooks(page, size, books);
+        return getPaginatedBooks(pageable, books);
     }
 
-    public PaginatedResponse<Book> searchBooks(String searchTerm, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public PaginatedResponse<Book> searchBooks(String searchTerm, Pageable pageable) {
         Page<Book> books = bookRepository.searchBooks(searchTerm, pageable);
-        return getPaginatedBooks(page, size, books);
+        return getPaginatedBooks(pageable, books);
     }
 
     public Optional<Book> getBookById(Long bookId) {
@@ -150,5 +148,9 @@ public class BookService {
         bookRepository.findById(id).ifPresentOrElse(bookRepository::delete, () -> {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book with id " + id + " not found.");
         });
+    }
+
+    public PaginatedResponse<Book> getAvailableBooks(Pageable pageable) {
+        return getPaginatedBooks(pageable, bookAvailabilityRepository.findAvailableBooks(pageable));
     }
 }
