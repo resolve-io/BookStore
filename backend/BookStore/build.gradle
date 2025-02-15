@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.resolve'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_21
@@ -43,6 +43,9 @@ dependencies {
 	implementation 'org.springframework.integration:spring-integration-webflux'
 	implementation 'org.springframework.security:spring-security-messaging'
 	implementation 'org.springframework.security:spring-security-messaging'
+
+	implementation 'org.hibernate:hibernate-validator:8.0.1.Final'
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
@@ -92,4 +95,17 @@ jar {
 			zipTree(it)
 		}
 	}
+}
+
+tasks.register('dockerImage', Exec) {
+	dependsOn bootJar
+
+	inputs.files("Dockerfile", "entrypoint.sh")
+
+	def imageName = System.getProperty("imageName") ? System.getProperty("imageName")
+			: "nexus-insights.resolvesys.com:8443/resolve-io/bookstore"
+	def jarFile = bootJar.archiveFileName.get()
+	def jarFilePath = projectDir.toPath().relativize(projectDir.toPath().resolve("build").resolve("libs").resolve(jarFile)).toString().replace('\\', '/')
+
+	commandLine "docker", "build", "--build-arg", "JAR_FILE=$jarFilePath", "-t", "$imageName:$version", "."
 }

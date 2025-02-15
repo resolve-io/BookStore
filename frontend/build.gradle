@@ -18,13 +18,18 @@ node {
 
 tasks.register('npmCi', NpmTask) {
     def path = projectDir.toPath()
-    inputs.dir(path.resolve("src"))
-    outputs.dirs(path.resolve("node_modules"), path.resolve("dist"))
+    inputs.files("package.json")
+    outputs.dirs(path.resolve("node_modules"))
 
     args = ['ci']
 }
 
 tasks.register('npmBuild', NpmTask) {
+    def path = projectDir.toPath()
+    inputs.dir(path.resolve("src"))
+    inputs.files("vite.config.ts", "tsconfig.node.js", "tsconfig.json", "tsconfig.app.json", "index.html")
+    outputs.dirs(path.resolve("dist"))
+
     dependsOn npmCi
     args = [ 'run', 'build' ]
 }
