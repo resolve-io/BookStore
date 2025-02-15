@@ -46,12 +46,12 @@ This project is a Spring Boot 3 application that leverages **Java 21** and **Pro
         gradle bootRun
         ```
 
-The application should now be running at `http://localhost:9090`.
+The application should now be running at `http://localhost:8080`.
 
 ## Accessing Swagger UI
 
 Swagger UI is available at:
-http://localhost:9090/swagger-ui/index.html
+http://localhost:8080/swagger-ui/index.html
 
 This UI allows you to interact with and test the API endpoints directly.
 
