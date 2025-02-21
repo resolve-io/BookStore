@@ -1,4 +1,4 @@
-name: Build Bookstore Image
+name: Deploy Bookstore to AWS
 
 on:
   workflow_dispatch:
