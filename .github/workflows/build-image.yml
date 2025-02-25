@@ -54,7 +54,6 @@ jobs:
       run: |
         cd backend/BookStore
         gradle build
-        gradle  -DimageName=$ECR_REGISTRY/${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG dockerImage
-        docker push $ECR_REGISTRY/${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG
-
+        gradle  -DimageName=$ECR_REGISTRY/${{ vars.ECR_REPOSITORY }} dockerImage
+        docker push $ECR_REGISTRY/${{ vars.ECR_REPOSITORY }}
 
