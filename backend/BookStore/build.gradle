@@ -103,9 +103,9 @@ tasks.register('dockerImage', Exec) {
 	inputs.files("Dockerfile", "entrypoint.sh")
 
 	def imageName = System.getProperty("imageName") ? System.getProperty("imageName")
-			: "nexus-insights.resolvesys.com:8443/resolve-io/bookstore"
+			: "nexus-insights.resolvesys.com:8443/resolve-io/bookstore:$version"
 	def jarFile = bootJar.archiveFileName.get()
 	def jarFilePath = projectDir.toPath().relativize(projectDir.toPath().resolve("build").resolve("libs").resolve(jarFile)).toString().replace('\\', '/')
 
-	commandLine "docker", "build", "--build-arg", "JAR_FILE=$jarFilePath", "-t", "$imageName:$version", "."
+	commandLine "docker", "build", "--build-arg", "JAR_FILE=$jarFilePath", "-t", "$imageName", "."
 }
