@@ -1,7 +1,10 @@
-name: Build Bookstore Image
+name: Build Bookstore and push image
 
 on:
   workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, edited, ready_for_review]
+    branches: [staging]
 
 
 concurrency:
@@ -12,4 +15,40 @@ permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
   pull-requests: write
+
+env:
+  IMAGE_TAG: latest
+
+jobs:
+  build-push-ecr:
+    if: github.event.pull_request.draft == false
+    name: Build and Push to ECR
+    runs-on: ubuntu-latest
+
+    steps:
+      
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.DEVOPS_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.DEVOPS_AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ vars.DEVOPS_AWS_REGION }}
+
+    - name: Login to ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+      with:
+        mask-password: "true"
+    - name: Build, tag and push image to ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: |
+        cd backend/bookstore
+        gradle build
+        gradlew dockerImage -DimageName=$ECR_REGISTRY/${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG
+        docker push $ECR_REGISTRY/${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG
+
 
