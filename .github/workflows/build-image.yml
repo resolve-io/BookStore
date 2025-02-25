@@ -46,6 +46,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
+        ls -lha
         cd backend/bookstore
         gradle build
         gradlew dockerImage -DimageName=$ECR_REGISTRY/${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG
