@@ -44,7 +44,7 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: ${{ github.workspace }}/deploy/task-definition.json
-        container-name: bookstore-main
+        container-name: bookstore-container
         image: $ECR_REGISTRY/${{ vars.ECR_REPOSITORY }}:latest
     
     - name: Deploy ECS task definition
