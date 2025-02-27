@@ -43,7 +43,7 @@ jobs:
       id: render-task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ${{ github.workspace }}/deploy/task-definition.j2
+        task-definition: ${{ github.workspace }}/deploy/task-definition.json
         container-name: bookstore-main
         image: $ECR_REGISTRY/${{ vars.ECR_REPOSITORY }}:latest
     
