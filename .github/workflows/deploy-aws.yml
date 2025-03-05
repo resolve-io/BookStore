@@ -13,3 +13,44 @@ permissions:
   contents: read  # This is required for actions/checkout
   pull-requests: write
 
+jobs:
+
+  deploy-ecs:
+    name: Deploy Bookstore to EKS
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.DEVOPS_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.DEVOPS_AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ vars.DEVOPS_AWS_REGION }}
+      
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+      with:
+        mask-password: "true"
+
+    - name: Render ECS task definition
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      id: render-task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: ${{ github.workspace }}/deploy/task-definition.json
+        container-name: bookstore-container
+        image: 432993365903.dkr.ecr.us-east-1.amazonaws.com/bookstore:latest
+    
+    - name: Deploy ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.render-task-def.outputs.task-definition }}
+        service: bookstore-main
+        cluster: actions-cluster
+        wait-for-service-stability: true
