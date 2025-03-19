@@ -61,3 +61,6 @@ jobs:
         service: bookstore-${{ github.run_id }}
         cluster: bookstore
         wait-for-service-stability: true
+    - name: Get Loadbalancer address
+      run: |
+         aws elbv2 describe-load-balancers --name bookstore-alb-${{ github.run_id }} --output text --query "LoadBalancers[*].DNSName"
