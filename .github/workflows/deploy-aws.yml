@@ -60,7 +60,7 @@ jobs:
           --desired-count 1 \
           --launch-type FARGATE \
           --network-configuration 'awsvpcConfiguration={subnets=[subnet-09cbd51d21ac71fbb,subnet-0e735835d90756222,subnet-06d19d11cf3d5a054,subnet-0f4acdeded5531668,subnet-04e42729a34259baa,subnet-0c86c07f9382be5fc],securityGroups=[sg-03e1bcaae7893d3ee],assignPublicIp="ENABLED"}' \
-          --load-balancers 'targetGroupArn=$target_group_arn,containerName="bookstore-container",containerPort=8080'
+          --load-balancers "targetGroupArn=$target_group_arn,containerName='bookstore-container',containerPort=8080"
     - name: Cleanup if fail
       if: failure()
       run: |
