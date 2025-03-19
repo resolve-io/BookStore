@@ -42,6 +42,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v2
       with:
         mask-password: "true"
+        
     - name: Setup Java
       uses: actions/setup-java@v4  
       with:
