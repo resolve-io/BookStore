@@ -53,6 +53,14 @@ jobs:
         aws elbv2 create-load-balancer --name bookstore-alb-${{ github.run_id }} --subnets subnet-09cbd51d21ac71fbb subnet-0e735835d90756222 subnet-06d19d11cf3d5a054 subnet-0f4acdeded5531668 subnet-04e42729a34259baa subnet-0c86c07f9382be5fc --security-groups sg-03e1bcaae7893d3ee --scheme internet-facing --type application
         loadbalancer_arn=$(aws elbv2 describe-load-balancers --name bookstore-alb-${{ github.run_id }} --output text --query "LoadBalancers[*].LoadBalancerArn")
         aws elbv2 create-listener --load-balancer-arn $loadbalancer_arn --protocol HTTP --port 80 --default-actions Type=forward,TargetGroupArn=$target_group_arn
+        aws ecs create-service \
+          --cluster bookstore \
+          --service-name bookstore-${{ github.run_id }} \
+          --task-definition bookstore \
+          --desired-count 1 \
+          --launch-type FARGATE \
+          --network-configuration 'awsvpcConfiguration={subnets=[subnet-09cbd51d21ac71fbb,subnet-0e735835d90756222,subnet-06d19d11cf3d5a054,subnet-0f4acdeded5531668,subnet-04e42729a34259baa,subnet-0c86c07f9382be5fc],securityGroups=[sg-03e1bcaae7893d3ee],assignPublicIp="ENABLED"}' \
+          --load-balancers 'targetGroupArn=$target_group_arn,containerName="bookstore-container",containerPort=8080'
     - name: Cleanup if fail
       if: failure()
       run: |
@@ -62,7 +70,7 @@ jobs:
         aws elbv2 delete-listener --listener-arn $listener_arn
         aws elbv2 delete-load-balancer --load-balancer-arn $loadbalancer_arn
         aws elbv2 delete-target-group --target-group-arn $target_group_arn
-        
+
     - name: Deploy ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
